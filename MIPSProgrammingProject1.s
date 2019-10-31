@@ -73,8 +73,8 @@ li $v0, 4
 la $a0, message2
 syscall
 
+add $a0, $s7, $zero
 li $v0, 1
-la $a0, $s7
 syscall
 
 
