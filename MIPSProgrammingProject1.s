@@ -1,7 +1,6 @@
 .data
 sum: .word  0 #I will use this to store the value of the users input
 message1: .asciiz "Input exactly 10 characters." #I'll need this to communicate with the user
-inputarray: .space 50 #I'm creating an array of 50 bytes to store the users characters
 buffer: .space 11
 
 .text
@@ -19,19 +18,62 @@ li $a1, 11 #allocating byte space for string to be stored
 move $t0, $a0 #storing string in t0
 syscall #executing command
 
-li $t1, 0 #creating a counter in $t0 and setting the value to 0
-li $t3, 9
-
-loopy:
-
-lb $t2, 0($t0)
 
 
+lb $t3, 0($t0)
+li $v0, 11
+la $a0, 0($t3)
+syscall
+
+lb $t3, 1($t0)
+li $v0, 11
+la $a0, 0($t3)
+syscall
+
+lb $t3, 2($t0)
+li $v0, 11
+la $a0, ($t3)
+syscall
+
+lb $t3, 3($t0)
+li $v0, 11
+la $a0, 0($t3)
+syscall
+
+lb $t3, 4($t0)
+li $v0, 11
+la $a0, 0($t3)
+syscall
+
+lb $t3, 5($t0)
+li $v0, 11
+la $a0, 0($t3)
+syscall
+
+lb $t3, 6($t0)
+li $v0, 11
+la $a0, 0($t3)
+syscall
+
+lb $t3, 7($t0)
+li $v0, 11
+la $a0, 0($t3)
+syscall
+
+lb $t3, 8($t0)
+li $v0, 11
+la $a0, 0($t3)
+syscall
+
+lb $t3, 9($t0)
+li $v0, 11
+la $a0, 0($t3)
+syscall
 
 
 
 
-
+exit:
 
 
 
