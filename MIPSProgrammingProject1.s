@@ -1,6 +1,7 @@
 .data
 sum: .word  0 #I will use this to store the value of the users input
 message1: .asciiz "Input exactly 10 characters." #I'll need this to communicate with the user
+message2: .asciiz "This is the value of your characters." #I'll display this after I finish converting everything.
 buffer: .space 32
 
 .text
@@ -24,6 +25,7 @@ syscall #executing command
 
 
 loopSelector:
+addi $s7, $zero, 0 #creating a register for my sum
 bge $t3, 11, Sum #as long as it is less than 11 it will loop.
 lb $t2, 0($s1) #Loading the value stored in the input at the base address.
 ble $t2, 47, specialCharacters #If the loaded value is less than 47 on the ascii table then it is a special character, so it jumps to the specialCharacter function.
@@ -34,7 +36,7 @@ ble $t2, 110, lowerCase #If the number is less than 110 and greater than 90 it i
 
 specialCharacters:
 sub $s2, $t2, $t2 #If an object is a special character it will elimate itself, and then it will store its value into register s2
-add sum, sum, $s2 #The value is then added to the sum.
+add $s7, $s7, $s2 #The value is then added to the sum.
 
 addi $t3, $t3, 1 #incrementing register 3
 
@@ -44,21 +46,21 @@ j loopSelector
 
 zeroThroughNine:
 sub $s2, $t2, 48 #Because the value of character 0 is 48 in decimal to properly calculate my sum I need to subtract 48 from the input value.
-add sum, sum, $s2 #The value is then added to the sum.
+add $s7, $s7, $s2 #The value is then added to the sum.
 
 addi $t3, $t3, 1 #incrementing register 3
 j loopSelector
 
 upperCase:
 sub $s2, $t2, 55 #With my base system, the value of n is 23. In order to properly represent that value I had to subtract 55 from the input value.
-add sum, sum, $s2 #The value is then added to the sum.
+add $s7, $s7, $s2 #The value is then added to the sum.
 addi $t3, $t3, 1 #incrementing register 3
 j loopSelector
 
 
 lowerCase:
 sub $s2, $t2, 87 ##With my base system, the value of n is 23. In order to properly represent that value I had to subtract 87 from the input value.
-add sum, sum, $s2 #The value is then added to the sum.
+add $s7, $s7, $s2 #The value is then added to the sum.
 
 addi $t3, $t3, 1 #incrementing register 3
 j loopSelector
@@ -66,8 +68,14 @@ j loopSelector
 
 
 Sum:
+#about to print the message and the value of sum.
+li $v0, 4
+la $a0, message2
+syscall
 
-
+li $v0, 1
+la $a0, $s7
+syscall
 
 
 li $v0, 10 #exit code
