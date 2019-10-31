@@ -1,7 +1,7 @@
 .data
 sum: .word  0 #I will use this to store the value of the users input
 message1: .asciiz "Input exactly 10 characters." #I'll need this to communicate with the user
-buffer: .space 11
+buffer: .space 32
 
 .text
 main:
@@ -19,57 +19,10 @@ move $t0, $a0 #storing string in t0
 syscall #executing command
 
 
-
 lb $t3, 0($t0)
 li $v0, 11
 la $a0, 0($t3)
 syscall
-
-lb $t3, 1($t0)
-li $v0, 11
-la $a0, 0($t3)
-syscall
-
-lb $t3, 2($t0)
-li $v0, 11
-la $a0, ($t3)
-syscall
-
-lb $t3, 3($t0)
-li $v0, 11
-la $a0, 0($t3)
-syscall
-
-lb $t3, 4($t0)
-li $v0, 11
-la $a0, 0($t3)
-syscall
-
-lb $t3, 5($t0)
-li $v0, 11
-la $a0, 0($t3)
-syscall
-
-lb $t3, 6($t0)
-li $v0, 11
-la $a0, 0($t3)
-syscall
-
-lb $t3, 7($t0)
-li $v0, 11
-la $a0, 0($t3)
-syscall
-
-lb $t3, 8($t0)
-li $v0, 11
-la $a0, 0($t3)
-syscall
-
-lb $t3, 9($t0)
-li $v0, 11
-la $a0, 0($t3)
-syscall
-
 
 
 
