@@ -38,6 +38,8 @@ add sum, sum, $s2 #The value is then added to the sum.
 
 addi $t3, $t3, 1 #incrementing register 3
 
+j loopSelector
+
 
 
 zeroThroughNine:
@@ -45,18 +47,21 @@ sub $s2, $t2, 48 #Because the value of character 0 is 48 in decimal to properly 
 add sum, sum, $s2 #The value is then added to the sum.
 
 addi $t3, $t3, 1 #incrementing register 3
+j loopSelector
 
 upperCase:
 sub $s2, $t2, 55 #With my base system, the value of n is 23. In order to properly represent that value I had to subtract 55 from the input value.
 add sum, sum, $s2 #The value is then added to the sum.
-
-
 addi $t3, $t3, 1 #incrementing register 3
+j loopSelector
+
+
 lowerCase:
 sub $s2, $t2, 87 ##With my base system, the value of n is 23. In order to properly represent that value I had to subtract 87 from the input value.
 add sum, sum, $s2 #The value is then added to the sum.
 
 addi $t3, $t3, 1 #incrementing register 3
+j loopSelector
 
 
 
