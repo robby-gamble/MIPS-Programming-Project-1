@@ -1,7 +1,8 @@
 .data
 sum: .word  0 #I will use this to store the value of the users input
-message1: .asciiz "Input exactly 10 characters." #I'll need this to communicate with the user
-message2: .asciiz "This is the value of your characters." #I'll display this after I finish converting everything.
+message1: .asciiz "Input exactly 10 characters.\n" #I'll need this to communicate with the user
+newLine: .asciiz "\n\n\n" #New Line
+message2: .asciiz "This is the value of your characters.\n" #I'll display this after I finish converting everything.
 buffer: .space 32
 
 .text
@@ -17,9 +18,13 @@ li $v0, 8 #Command to read a string
 la $a0, buffer #storing space for the string
 li $a1, 11 #allocating byte space for string to be stored
 syscall #executing command
+
+
+li $v0, 4
+la $a0, newLine    #Printing a line in between for formatting
+syscall
+
 move $s1, $a0 #storing string in $s1
-
-
 
 
 
@@ -37,8 +42,8 @@ specialCharacters:
 sub $s2, $t2, $t2 #If an object is a special character it will elimate itself, and then it will store its value into register s2
 add $s7, $s7, $s2 #The value is then added to the sum.
 
-addi $t3, $t3, 1 #incrementing register 3
-addi $s1, $s1,1 #Incrementing "i"
+addi $t3, $t3, 1 #incrementing i
+addi $s1, $s1,1 #Incrementing "string register"
 
 j loopSelector
 
@@ -48,25 +53,27 @@ zeroThroughNine:
 sub $s2, $t2, 48 #Because the value of character 0 is 48 in decimal to properly calculate my sum I need to subtract 48 from the input value.
 add $s7, $s7, $s2 #The value is then added to the sum.
 
-addi $t3, $t3, 1 #incrementing register 3
-addi $s1, $s1,1 #Incrementing "i"
+addi $t3, $t3, 1 #incrementing i
+addi $s1, $s1,1 #Incrementing "string register"
 j loopSelector
 
 upperCase:
+blt $t2, 65, specialCharacters
 sub $s2, $t2, 55 #With my base system, the value of n is 23. In order to properly represent that value I had to subtract 55 from the input value.
 add $s7, $s7, $s2 #The value is then added to the sum.
 
-addi $t3, $t3, 1 #incrementing register 3
-addi $s1, $s1,1 #Incrementing "i"
+addi $t3, $t3, 1 #incrementing i
+addi $s1, $s1,1 #Incrementing "string register"
 j loopSelector
 
 
 lowerCase:
+blt $t2, 97, specialCharacters
 sub $s2, $t2, 87 ##With my base system, the value of n is 23. In order to properly represent that value I had to subtract 87 from the input value.
 add $s7, $s7, $s2 #The value is then added to the sum.
 
-addi $t3, $t3, 1 #incrementing register 3
-addi $s1, $s1,1 #Incrementing "i"
+addi $t3, $t3, 1 #incrementing i
+addi $s1, $s1,1 #Incrementing "string register"
 j loopSelector
 
 
