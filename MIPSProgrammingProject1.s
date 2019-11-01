@@ -16,16 +16,15 @@ syscall #executing command
 li $v0, 8 #Command to read a string
 la $a0, buffer #storing space for the string
 li $a1, 11 #allocating byte space for string to be stored
-move $s1, $a0 #storing string in t0
 syscall #executing command
-
+move $s1, $a0 #storing string in $s1
 
 
 
 
 
 loopSelector:
-addi $s7, $zero, 0 #creating a register for my sum
+
 bge $t3, 11, Sum #as long as it is less than 11 it will loop.
 lb $t2, 0($s1) #Loading the value stored in the input at the base address.
 ble $t2, 47, specialCharacters #If the loaded value is less than 47 on the ascii table then it is a special character, so it jumps to the specialCharacter function.
@@ -39,6 +38,7 @@ sub $s2, $t2, $t2 #If an object is a special character it will elimate itself, a
 add $s7, $s7, $s2 #The value is then added to the sum.
 
 addi $t3, $t3, 1 #incrementing register 3
+addi $s6, $s6,1 #Incrementing "i"
 
 j loopSelector
 
@@ -49,12 +49,14 @@ sub $s2, $t2, 48 #Because the value of character 0 is 48 in decimal to properly 
 add $s7, $s7, $s2 #The value is then added to the sum.
 
 addi $t3, $t3, 1 #incrementing register 3
+addi $s6, $s6,1 #Incrementing "i"
 j loopSelector
 
 upperCase:
 sub $s2, $t2, 55 #With my base system, the value of n is 23. In order to properly represent that value I had to subtract 55 from the input value.
 add $s7, $s7, $s2 #The value is then added to the sum.
 addi $t3, $t3, 1 #incrementing register 3
+addi $s6, $s6,1 #Incrementing "i"
 j loopSelector
 
 
@@ -63,6 +65,7 @@ sub $s2, $t2, 87 ##With my base system, the value of n is 23. In order to proper
 add $s7, $s7, $s2 #The value is then added to the sum.
 
 addi $t3, $t3, 1 #incrementing register 3
+addi $s6, $s6,1 #Incrementing "i"
 j loopSelector
 
 
