@@ -38,7 +38,7 @@ sub $s2, $t2, $t2 #If an object is a special character it will elimate itself, a
 add $s7, $s7, $s2 #The value is then added to the sum.
 
 addi $t3, $t3, 1 #incrementing register 3
-addi $s6, $s6,1 #Incrementing "i"
+addi $s1, $s1,1 #Incrementing "i"
 
 j loopSelector
 
@@ -49,14 +49,15 @@ sub $s2, $t2, 48 #Because the value of character 0 is 48 in decimal to properly 
 add $s7, $s7, $s2 #The value is then added to the sum.
 
 addi $t3, $t3, 1 #incrementing register 3
-addi $s6, $s6,1 #Incrementing "i"
+addi $s1, $s1,1 #Incrementing "i"
 j loopSelector
 
 upperCase:
 sub $s2, $t2, 55 #With my base system, the value of n is 23. In order to properly represent that value I had to subtract 55 from the input value.
 add $s7, $s7, $s2 #The value is then added to the sum.
+
 addi $t3, $t3, 1 #incrementing register 3
-addi $s6, $s6,1 #Incrementing "i"
+addi $s1, $s1,1 #Incrementing "i"
 j loopSelector
 
 
@@ -65,7 +66,7 @@ sub $s2, $t2, 87 ##With my base system, the value of n is 23. In order to proper
 add $s7, $s7, $s2 #The value is then added to the sum.
 
 addi $t3, $t3, 1 #incrementing register 3
-addi $s6, $s6,1 #Incrementing "i"
+addi $s1, $s1,1 #Incrementing "i"
 j loopSelector
 
 
